@@ -1,7 +1,7 @@
 # Importing dependecies
 import os
 import asyncio
-from openai import AsyncOpenAI
+from groq import Groq
 from dotenv import load_dotenv
 
 
@@ -11,14 +11,14 @@ from dotenv import load_dotenv
 # 2/ load variables from .env file
 load_dotenv()
 # 3/ set up the client 
-client = AsyncOpenAI(
-    api_key=os.getenv("OPENAI_API_KEY"),
+client = Groq(
+    api_key=os.environ.get("GROQ_API_KEY"),
 )
 
 
 # Defining the PromptEnhancer class containing the necessary components for the Advanced Prompt Generation Pipeline
 class PromptEnhancer:
-    def __init__(self, model="gpt-4o-mini", temperature=0.0, tools_dict={}):
+    def __init__(self, model="meta-llama/llama-4-maverick-17b-128e-instruct", temperature=0.0, tools_dict={}):
         self.model = model
         self.prompt_tokens = 0
         self.completion_tokens = 0

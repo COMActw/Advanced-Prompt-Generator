@@ -7,12 +7,12 @@ import asyncio
 from pipeline import PromptEnhancer
 
 
-async def advancedPromptPipeline(InputPrompt, model="gpt-4o-mini", temperature=0.0):
+async def advancedPromptPipeline(InputPrompt, model="meta-llama/llama-4-maverick-17b-128e-instruct", temperature=0.0):
     
     if model == "gpt-4o":
         i_cost=5/10**6
         o_cost=15/10**6
-    elif model == "gpt-4o-mini":
+    elif model == "meta-llama/llama-4-maverick-17b-128e-instruct":
         i_cost=0.15/10**6
         o_cost=0.6/10**6
     
@@ -39,7 +39,7 @@ async def advancedPromptPipeline(InputPrompt, model="gpt-4o-mini", temperature=0
 demo = gr.Interface(fn=advancedPromptPipeline, 
                     inputs=[
                         gr.Textbox(lines=11, placeholder="Enter your prompt", label="Input Prompt", min_width=100),
-                        gr.Radio(["gpt-4o-mini", "gpt-4o"], value="gpt-4o-mini", label="Select Model", info="Recommended: gpt-4o-mini"),
+                        gr.Radio(["meta-llama/llama-4-maverick-17b-128e-instruct", "gpt-4o"], value="meta-llama/llama-4-maverick-17b-128e-instruct", label="Select Model", info="Recommended: meta-llama/llama-4-maverick-17b-128e-instruct"),
                         gr.Slider(minimum=0.0, maximum=1.0, value=0.0, step=0.1, label="Temperature", info="Recommended: Temperature=0.0")
                         ], 
                     outputs=[

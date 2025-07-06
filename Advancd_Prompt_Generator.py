@@ -2,7 +2,7 @@
 import os
 import time
 import asyncio
-from openai import AsyncOpenAI
+from groq import Groq
 from dotenv import load_dotenv
 
 
@@ -12,14 +12,14 @@ from dotenv import load_dotenv
 # 2/ load variables from .env file
 load_dotenv()
 # 3/ set up the client 
-client = AsyncOpenAI(
-    api_key=os.getenv("OPENAI_API_KEY"),
+client = Groq(
+    api_key=os.environ.get("GROQ_API_KEY"),
 )
 
 
 # Defining the PromptEnhancer class containing the necessary components for the Advanced Prompt Generation Pipeline
 class PromptEnhancer:
-    def __init__(self, model="gpt-4o-mini", tools_dict={}):
+    def __init__(self, model="meta-llama/llama-4-maverick-17b-128e-instruct", tools_dict={}):
         self.model = model
         self.prompt_tokens = 0
         self.completion_tokens = 0
@@ -429,7 +429,7 @@ async def main():
     
     print("|- Choose the model -----------------------------")
     print("|   1) GPT-4o")
-    print("|   2) GPT-4o-mini")
+    print("|   2) meta-llama/llama-4-maverick-17b-128e-instruct")
     print("|")
     
     which_model = input("|   Select [1/2]: \n|   > ")
@@ -439,7 +439,7 @@ async def main():
         i_cost=5/10**6
         o_cost=15/10**6
     elif which_model == "2":
-        model="gpt-4o-mini"
+        model="meta-llama/llama-4-maverick-17b-128e-instruct"
         i_cost=0.15/10**6
         o_cost=0.6/10**6
     else:
